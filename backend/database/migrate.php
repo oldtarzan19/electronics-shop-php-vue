@@ -4,21 +4,24 @@ require __DIR__ . '/Database.php';
 
 try {
     $dir = new DirectoryIterator(__DIR__ . '/migrations/.');
-    $migrations = [];
+    $files = [];
     foreach ($dir as $fileInfo) {
         if ($fileInfo->isDot() || $fileInfo->getExtension() !== 'php') {
             continue;
         }
-        $migrations[] = require $fileInfo->getPathname();
+        $files[] = $fileInfo->getPathname();
     }
 
     $pdo = new Database()->connect();
 
-    foreach ($migrations as $migration) {
-        $migration($pdo);
+    sort($files);
+
+    foreach ($files as $file) {
+       $migration = require $file;
+       $migration($pdo);
     }
 
-    echo 'Done';
+    echo 'Migration is done';
 } catch (Exception $e) {
     echo $e->getMessage();
 }
