@@ -1,12 +1,6 @@
 <?php
 
-use Controllers\RegisterController;
-
-require_once __DIR__ . '/../Model/User.php';
-require_once __DIR__ . '/../Database/Database.php';
-require_once __DIR__ . '/../Repository/UserRepository.php';
-require_once __DIR__ . '/../Controllers/RegisterController.php';
-
+use App\Controllers\RegisterController;
 
 header('Content-Type: application/json; charset=utf-8');
 header("Access-Control-Allow-Origin: http://localhost:5173");

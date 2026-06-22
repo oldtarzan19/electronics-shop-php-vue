@@ -1,6 +1,8 @@
 <?php
 
-require __DIR__ . '/Database.php';
+require __DIR__ . '/../vendor/autoload.php';
+
+use App\Database\Database;
 
 try {
     $dir = new DirectoryIterator(__DIR__ . '/migrations/.');

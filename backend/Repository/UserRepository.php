@@ -1,8 +1,9 @@
 <?php
 
-namespace Repository;
+namespace App\Repository;
 
-use Model\User;
+use App\Database\Database;
+use App\Model\User;
 use PDO;
 use PDOException;
 
@@ -11,7 +12,7 @@ class UserRepository
     private PDO $pdo;
     public function __construct()
     {
-        $db = new \Database()->connect();
+        $db = (new Database())->connect();
         $this->pdo = $db;
     }
 

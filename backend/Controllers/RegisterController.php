@@ -1,9 +1,9 @@
 <?php
 
-namespace Controllers;
+namespace App\Controllers;
 
-use Model\User;
-use Repository\UserRepository;
+use App\Model\User;
+use App\Repository\UserRepository;
 
 class RegisterController
 {
