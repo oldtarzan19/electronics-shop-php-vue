@@ -1,7 +1,10 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { ref } from 'vue'
-import api from '@/services/api.js'
+import { useAuthStore } from '@/stores/auth.js'
+
+const store = useAuthStore()
+const router = useRouter()
 
 const formData = ref({
   name: '',
@@ -10,11 +13,9 @@ const formData = ref({
   address: '',
 })
 
-const submitForm = (e) => {
-  e.preventDefault()
-
-  api.post('/register', formData.value).then((response) => {
-    console.log(response)
+const submitForm = () => {
+  store.register(formData.value).then(() => {
+    router.push('/')
   }).catch((error) => {
     console.error(error)
   })
@@ -51,7 +52,7 @@ const submitForm = (e) => {
           Hozd létre a fiókod, és legyen egyszerűbb minden következő vásárlás.
         </p>
 
-        <form @submit="submitForm" class="mt-8 space-y-4">
+        <form @submit.prevent="submitForm" class="mt-8 space-y-4">
           <label class="block"
             ><span class="mb-2 block text-xs font-black tracking-wider uppercase"
               >Felhasználónév</span

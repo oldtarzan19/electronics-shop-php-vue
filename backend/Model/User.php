@@ -4,11 +4,11 @@ namespace App\Model;
 
 class User
 {
-    private $id;
-    private $name;
-    private $email;
-    private $address;
-    private $role;
+    private int $id;
+    private string $name;
+    private string $email;
+    private string $address;
+    private string $role;
 
     public function __construct($id, $name, $email, $address, $role)
     {
@@ -20,44 +20,53 @@ class User
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getAddress()
+    public function getAddress(): string
     {
         return $this->address;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getRole()
+    public function getRole(): string
     {
         return $this->role;
     }
 
-
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'address' => $this->address,
+            'role' => $this->role
+        ];
+    }
 }

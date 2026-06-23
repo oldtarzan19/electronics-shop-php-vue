@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Model\User;
 use App\Repository\UserRepository;
+use PDOException;
 
 class RegisterController
 {
@@ -39,7 +40,7 @@ class RegisterController
         $hashedPassword = password_hash($userData['password'], PASSWORD_DEFAULT);
         try {
             $lastId = $this->userRepository->create($user, $hashedPassword);
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             http_response_code(500);
             echo json_encode(['error' => $e->getMessage()]);
             return;
@@ -49,6 +50,10 @@ class RegisterController
         $_SESSION['userId'] = $lastId;
         $_SESSION['role'] = 'user';
         http_response_code(201);
-        echo json_encode(['id' => $lastId]);
+
+        $createdUser = $user->toArray();
+        $createdUser['id'] = $lastId;
+
+        echo json_encode(['user' => $createdUser]);
     }
 }
